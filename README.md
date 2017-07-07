@@ -1,7 +1,8 @@
 # LogACD-EF
 ==========
+
 ##Overview
-The code allows the user to carry out Log ACD$(p,q)$ modeling of time series of durations using martinglae estimating functions, as discussed in our manuscript. Specifically, this code will enable the user to generate time series of durations as discussed in section 7 and to reproduce the results in  Table 1. With slight modification, the code is used for the real data analysis shown in section 8. 
+The code allows the user to carry out Log ACD$(p,q)$ modeling of time series of durations using martinglae estimating functions, as discussed in our manuscript. Specifically, this code will enable the user to generate time series of durations as discussed in section 7 and to reproduce the results in  Figure 7 and Table 5. With slight modification, the code is used for the real data analysis shown in section 8. 
 
 ##Required Software
 *  R/Rstudio 
@@ -43,6 +44,14 @@ isOpen                       ### If successfully connected, TRUE will be returne
   nburn | number of burn-in durations
   method | method to estimate parameters ("NESE", "AVRE", "AISRE")
   n_interation | maximum number of iterations, if "AISRE" is specified
+  
+7. More parameters for Penalized EF Approach
 
-7. To reproduce our results, set seed as $123457$
+  Arguments  | Description
+  -----------|------------
+  lambda | Tuning parameter for SCAD penalty
+  a | Tuning parameter for SCAD penalty
+  p, q | Model order for the Log ACD$(p,q)$ model
+
+8. To reproduce our results, set seed as $123457$
 
