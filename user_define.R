@@ -35,9 +35,18 @@ InitMat <- function(x,p,q){
   arma.phi <- as.numeric(arma.model$coef[1:p])
   arma.th <- as.numeric(arma.model$coef[(p+1):(pdim-1)])
   arma.mu <- as.numeric(arma.model$coef[pdim])
-  if(p==1 & q==0) {
-    mat.vec <- c(-arma.mu, 1-arma.phi,
-                 1, 0)
+  
+  #if(p==1 & q==0) {
+  #  mat.vec <- c(-arma.mu, 1-arma.phi,
+  #               1, 0)
+  #}
+  if(q == 0){
+    R1 <- c(rep(-arma.mu, p), 1-sum(arma.phi))
+    #R2 <- matrix(R1, nrow = 1, ncol= (p+length(arma.phi)))
+    M1 <- diag(1, p)
+    M1 <- cbind(M1, matrix(0, p, ncol = 1))
+    mat.vec <- rbind(R1, M1)
+    mat.vec <- as.matrix(mat.vec)
   }else{
     if(p==q){
       R1 <- c(rep(-arma.mu,p),rep(0,q), 1-sum(arma.phi))
@@ -101,4 +110,29 @@ finitval <- function (x, p=1, q=1) {
     results <- c(omega.hat, alpha.hat, beta.hat)
   }
 
+## first derivative of SCAD penalty
+p.lam.prime <- function(theta, initial, lambda, a,tau){
+  n <- length(initial)
+  penalty <- rep(0, n)
+  for(i in 1:n){
+    t1 <- abs(initial[i]) <= lambda
+    t2 <- max((a*lambda- abs(initial[i])),0)/((a-1)*lambda)
+    t3 <- abs(initial[i]) > lambda
+    penalty[i] <- lambda*(t1+ t2*t3)/abs(initial[i]+tau)*theta[i]
+  }
+  return(penalty)
+}
 
+## second derivative of SCAD penalty
+p.lam.2prime <- function(initial,lambda, a,tau){
+  n <- length(initial)
+  penalty <- rep(0, n)
+  for(i in 1:n){
+    t1 <- abs(initial[i]) <= lambda
+    t2 <- max((a*lambda- abs(initial[i])),0)/((a-1)*lambda)
+    t3 <- abs(initial[i]) > lambda
+    penalty[i] <- lambda*(t1+ t2*t3)/(abs(initial[i])+tau)
+    #penalty[i] <- lambda*(t1+ t2*t3)
+  }
+  return(penalty)
+}
