@@ -21,7 +21,7 @@ isOpen
 ### Five scenarios in simulation study
 #omega = 0.25, alpha = 0.05    Gamma(0.6, 0.7)
 #omega = 0.04, alpha = 0.05, beta = 0.75)  Exp(1)
-#omega = 1, alpha = 0.05, beta = 0.75)   Weibull(0.4, 0.5)
+#omega = 1, alpha = 0.05, beta = 0.6)   Weibull(0.4, 0.5)
 #omega = 0.5, alpha1 = 0.05, alpha2 = 0.1, beta = 0.6)  Weibull(0.9, 0.9)
 #omega = 0.15, alpha1 = 0.05, alpha2 = 0.1, beta1 = -0.05, beta2 = 0.7)  Gamma(0.5, 0.8)
 
